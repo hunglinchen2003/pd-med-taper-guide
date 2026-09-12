@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f5d50">
+  <title>帕金森用藥對照｜原本劑量與減量草案</title>
+  <meta name="description" content="75歲、約42公斤帕金森病人的用藥盤點、副作用與分階段減量討論稿。供回診與醫師討論，不可自行一次全改。">
+  <style>
+    :root {
+      --bg: #f3eee6;
+      --card: #fffdf8;
+      --ink: #1c1916;
+      --muted: #5c564e;
+      --line: #ddd4c6;
+      --keep: #2f5d50;
+      --keep-soft: #e7f1ed;
+      --hot: #8b3a2a;
+      --hot-soft: #f8ebe6;
+      --warn: #8a5a12;
+      --warn-soft: #f7eedc;
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1.65;
+    }
+    a { color: var(--keep); }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #2f5d50;
+      color: #fff;
+      padding: 14px 16px 12px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    header p {
+      margin: 4px 0 0;
+      font-size: 0.86rem;
+      opacity: 0.9;
+    }
+    nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 10px 16px 12px;
+      background: #264d43;
+    }
+    nav a {
+      flex: 0 0 auto;
+      color: #fff;
+      text-decoration: none;
+      background: rgba(255,255,255,0.12);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.9rem;
+    }
+    main { padding: 16px 16px 96px; max-width: 720px; margin: 0 auto; }
+    section { margin: 0 0 28px; }
+    h2 {
+      font-size: 1.25rem;
+      margin: 0 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--line);
+    }
+    h3 { font-size: 1.05rem; margin: 18px 0 8px; }
+    p { margin: 0 0 12px; }
+    .lead { font-size: 1.05rem; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px 14px 12px;
+      margin: 0 0 12px;
+    }
+    .card.hot { background: var(--hot-soft); border-color: #e3c4bb; }
+    .card.keep { background: var(--keep-soft); border-color: #c5d9d1; }
+    .card.warn { background: var(--warn-soft); border-color: #ead9b4; }
+    .kicker {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 6px;
+    }
+    .hot .kicker { color: var(--hot); }
+    .keep .kicker { color: var(--keep); }
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+    }
+    .stat b {
+      display: block;
+      font-size: 1.45rem;
+      line-height: 1.2;
+    }
+    .stat span { color: var(--muted); font-size: 0.86rem; }
+    .stat.hot b { color: var(--hot); }
+    .stat.keep b { color: var(--keep); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+    th, td {
+      padding: 10px 8px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+    }
+    th {
+      background: #efe8dc;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+    }
+    tr:last-child td { border-bottom: 0; }
+    .dose-now { color: var(--hot); font-weight: 700; }
+    .dose-new { color: var(--keep); font-weight: 700; }
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #efe8dc;
+      color: var(--muted);
+      margin-right: 4px;
+    }
+    .tag.hot { background: #f0d4cc; color: var(--hot); }
+    .tag.keep { background: #d5e6df; color: var(--keep); }
+    .tag.warn { background: #f3e4c2; color: var(--warn); }
+    .slot {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 8px;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--line);
+    }
+    .slot:last-child { border-bottom: 0; }
+    .time {
+      font-weight: 700;
+      color: var(--keep);
+    }
+    .pills { margin: 0; padding-left: 1.1em; }
+    footer {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+    .note { font-size: 0.92rem; color: var(--muted); }
+    @media (min-width: 640px) {
+      .stats { grid-template-columns: repeat(4, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>帕金森用藥對照</h1>
+    <p>75 歲女性 · 約 42 kg · 供 9/23 回診討論</p>
+  </header>
+  <nav>
+    <a href="#conclusion">結論</a>
+    <a href="#pain">神經痛</a>
+    <a href="#side-effects">副作用</a>
+    <a href="#compare">劑量對照</a>
+    <a href="#plan">減量步驟</a>
+    <a href="#ask">回診要問</a>
+  </nav>
+  <main>
+    <section id="conclusion">
+      <h2>整合結論</h2>
+      <div class="card hot">
+        <p class="kicker">一句話</p>
+        <p class="lead"><b>現在不是心寧美太重，是同一時間疊了太多會放大異動的藥。</b>整天扭動，會把打過骨水泥、又開過刀的脊椎反覆拉扯。病人說的神經痛，很大一部分可能是「異動在扯舊傷」，不是再加止痛藥就能好。</p>
+      </div>
+      <div class="stats">
+        <div class="stat hot"><b>約 1700</b><span>目前 LEDD（含始立）</span></div>
+        <div class="stat hot"><b>41</b><span>mg/kg（以 42 kg 計）</span></div>
+        <div class="stat keep"><b>約 550–630</b><span>減量目標 LEDD</span></div>
+        <div class="stat keep"><b>心寧美先留</b><span>不要先砍主軸藥</span></div>
+      </div>
+      <p class="note">LEDD＝左旋多巴當量。數字是依家裡手寫時間表估算：心寧美 300 mg ＋始立約 4–5 顆＋安滿達 400 mg＋愛可穩 100 mg＋賣力膜 8 mg。家屬若在 8 mg 上再加半片，還會再高一截。</p>
+      <div class="card">
+        <p class="kicker">現在最重要</p>
+        <p>回診前<b>不要自行一次停好幾顆</b>。突然停安滿達、停左旋多巴，可能全身僵硬、高燒、肌肉溶解，比異動更急。正確做法是：醫師同意後，<b>一次只改一樣、隔一到兩週再改下一樣</b>。</p>
+      </div>
+    </section>
+
+    <section id="pain">
+      <h2>為什麼會神經痛</h2>
+      <p>脊椎已做過<b>補骨水</b>又<b>開刀</b>。張醫師先前就說過：藥吃這麼重一陣子，異動到後來去開脊椎。體重掉到約 42 kg 後，同樣毫克數更濃，異動更容易再傷這節脊椎。</p>
+      <div class="card hot">
+        <p class="kicker">痛 A · 異動期</p>
+        <p>藥太多時：扭、晃、坐不住。開過刀的骨頭和神經根被反覆剪切，會像電、刺、抽。這時再加肌鬆或神經痛藥，常常治標不治本。</p>
+      </div>
+      <div class="card warn">
+        <p class="kicker">痛 B · 關機期</p>
+        <p>藥不夠或亂停時：僵、抽筋、整條背扳住。這種痛要靠穩定的心寧美，<b>不能先砍心寧美</b>。</p>
+      </div>
+      <div class="card">
+        <p class="kicker">痛 C · 脊椎結構</p>
+        <p>壓迫性骨折、骨水泥、手術後神經根，本來就會痛。這要骨科／復健一起看。但若異動沒減，結構痛很難好，也比較容易再骨折、再跌倒。</p>
+      </div>
+      <p>住院時開過 Lyrica（神經痛）、舒肌痛（肌鬆）、佑克（消炎痛）、兩種安眠藥。對 42 kg 高齡，這些會<b>更軟、更昏、更容易跌</b>，跌一次對補過骨水泥的脊椎很傷。</p>
+    </section>
+
+    <section id="side-effects">
+      <h2>各藥副作用（跟這位病人特別有關的）</h2>
+
+      <div class="card keep">
+        <p class="kicker">建議先保留</p>
+        <h3>心寧美 Sinemet（左旋多巴 300 mg／日）</h3>
+        <p>走路、翻身、吞嚥的底。目前是<b>每 4 小時半粒</b>，單次劑量其實不大。</p>
+        <p><b>副作用：</b>峰值異動、噁心、低血壓、幻覺（高劑量時）。</p>
+        <p><b>和神經痛：</b>吃完就大扭，痛會在異動時出現；若亂減，關機僵硬一樣會讓脊椎痛。所以減量草案<b>先不動這支</b>。</p>
+      </div>
+
+      <div class="card hot">
+        <p class="kicker">最該先拿掉重疊</p>
+        <h3>始立 Stalevo（約 4–5 顆／日）</h3>
+        <p>每顆含左旋多巴 100 mg + 卡比多巴 25 mg + 恩他卡朋 200 mg。手寫時間表是<b>跟心寧美同一時間一起吃</b>，等於一次吃 150 mg 左旋多巴，還被恩他卡朋再放大約三成。</p>
+        <p><b>副作用：</b>異動明顯變重、腹瀉、尿色變深、低血壓。</p>
+        <p><b>和神經痛：</b>這是把異動推上去的主因之一。異動越兇，脊椎舊傷越痛。</p>
+      </div>
+
+      <div class="card hot">
+        <p class="kicker">高齡 42 kg 幾乎是上限中毒區</p>
+        <h3>安滿達 Amantadine 400 mg／日</h3>
+        <p>標示不得超過 400 mg；超過 200 mg 毒性就上升。75 歲、腎清除差、體重 42 kg，常用往往只有 100–200 mg。</p>
+        <p><b>副作用：</b>幻覺、混亂、腳腫、網狀青斑、口乾、解尿困難、<b>肌躍（身體突然跳一下）</b>、跌倒。</p>
+        <p><b>和神經痛：</b>肌躍很像神經電擊；腳腫、走路不穩也容易再跌、再傷脊椎。這支必須很慢減，不能隔天停光。</p>
+      </div>
+
+      <div class="card warn">
+        <p class="kicker">會放大異動</p>
+        <h3>愛可穩 Safinamide 100 mg／日</h3>
+        <p>已是核准最大量。住院單曾寫「早晚各 2 粒」（等於 200 mg），超過仿單上限，回家手寫是早上 2 粒（100 mg）。先確認沒有吃成一天兩次。</p>
+        <p><b>副作用：</b>異動、失眠或嗜睡、頭暈、頭痛、姿勢性低血壓、跌倒。</p>
+        <p><b>和神經痛：</b>本身不傷神經，但會讓左旋多巴的異動更明顯，間接拉扯脊椎。</p>
+      </div>
+
+      <div class="card warn">
+        <p class="kicker">家屬加了半片</p>
+        <h3>賣力膜 Neupro（住院 8 mg；家屬加半片）</h3>
+        <p>多巴胺貼片，24 小時持續給藥。晚期帕金森核准最大常到 8 mg；瘦弱高齡對激動劑更敏感。</p>
+        <p><b>副作用：</b>異動、想睡、幻覺、皮膚癢、腳腫、噁心、姿勢性低血壓。</p>
+        <p><b>和神經痛：</b>貼片整天都在推多巴胺，異動不一定只在吃藥後，脊椎會整天被晃。</p>
+      </div>
+
+      <div class="card hot">
+        <p class="kicker">跌倒風險</p>
+        <h3>瑞多寧／利福全 Clonazepam</h3>
+        <p>藥袋是<b>每次半粒、一天四次</b>（1 mg）。手寫寫「1 顆」四次，若吃的是整粒 0.5 mg，就變成 <b>2 mg／日</b>。住院還加睡前安規 0.5 mg，等於雙重安眠藥。</p>
+        <p><b>副作用：</b>肌肉變軟、嗜睡、混亂、流口水、吸入性肺炎、成癮、突然停藥會抽搐。</p>
+        <p><b>和神經痛：</b>不治療神經痛。它讓人軟、跌，對補骨水泥後的脊椎是危險因子。若要用，多數只留睡前 0.25–0.5 mg。</p>
+      </div>
+
+      <div class="card">
+        <p class="kicker">住院有、回家要問還有沒有在吃</p>
+        <h3>止痛／神經痛相關</h3>
+        <ul class="pills">
+          <li><b>Lyrica 75 mg 睡前：</b>神經痛藥。副作用是腫、昏、跌、視力模糊。對「異動拉脊椎」效果有限。</li>
+          <li><b>舒肌痛 Soma：</b>含氯唑沙宗（肌鬆）+ 普拿疼。和安眠藥一起會更軟，也傷肝。治不了神經根痛。</li>
+          <li><b>佑克 60 mg：</b>消炎止痛。老人有胃、腎、心血管風險。</li>
+          <li><b>普達 cilostazol：</b>擴血管、抗血小板。頭痛、心悸、容易瘀青；若還要動脊椎相關處置，一定要讓醫師知道。</li>
+          <li><b>脈優 5 mg：</b>降壓。和帕金森藥一起更易低血壓、腳腫（和安滿達疊加）。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="compare">
+      <h2>原本劑量 vs 建議減量</h2>
+      <p>「建議」是給醫師看的草案，不是現在立刻改的藥單。</p>
+      <div style="overflow-x:auto; -webkit-overflow-scrolling:touch;">
+        <table>
+          <thead>
+            <tr>
+              <th>藥</th>
+              <th>原本（家裡／住院）</th>
+              <th>建議目標</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>心寧美</td>
+              <td class="dose-now">半粒 × 6 次<br>左旋多巴 300 mg</td>
+              <td class="dose-new">維持不變</td>
+            </tr>
+            <tr>
+              <td>始立</td>
+              <td class="dose-now">約 4–5 顆<br>再加 400–500 mg 左旋多巴</td>
+              <td class="dose-new">停（不要跟心寧美同時吃）</td>
+            </tr>
+            <tr>
+              <td>安滿達</td>
+              <td class="dose-now">100 mg × 4<br>共 400 mg</td>
+              <td class="dose-new">先 300，再 200<br>高齡目標常是 100–200</td>
+            </tr>
+            <tr>
+              <td>愛可穩</td>
+              <td class="dose-now">早上 2 粒＝100 mg<br>（住院單曾寫早晚各 2 粒）</td>
+              <td class="dose-new">改 1 粒＝50 mg<br>先確認沒有吃成一天兩次</td>
+            </tr>
+            <tr>
+              <td>賣力膜</td>
+              <td class="dose-now">住院 8 mg<br>家屬又加半片</td>
+              <td class="dose-new">先拿掉多加的半片<br>再跟醫師商量 8→4 mg</td>
+            </tr>
+            <tr>
+              <td>利福全</td>
+              <td class="dose-now">手寫 1 顆 × 4 次<br>藥袋是半粒 × 4 次</td>
+              <td class="dose-new">先改回半粒<br>再收到只睡前 0.25–0.5 mg</td>
+            </tr>
+            <tr>
+              <td>安規／Lyrica／舒肌痛</td>
+              <td class="dose-now">住院有併用</td>
+              <td class="dose-new">請醫師重評<br>能少則少，防跌倒</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="plan">
+      <h2>分三階段減量（一次只改一樣）</h2>
+
+      <div class="card keep">
+        <p class="kicker">回診前 · 先別動</p>
+        <p>維持目前吃法，避免關機。能做的是：量體重、拍異動影片、列出始立到底還吃幾顆、賣力膜實際貼幾毫克。</p>
+      </div>
+
+      <h3>第一階段 · 只拿重疊（約 1 週）</h3>
+      <p>風險最低：停始立（或先停白天、留一個最關機時段）、賣力膜不加半片、利福全改回藥袋半粒、愛可穩確認一天只早上 2 粒。</p>
+      <div class="card">
+        <div class="slot"><div class="time">05:00</div><div>心寧美 0.5、安滿達 1、利福全半粒<br><span class="note">拿掉始立整顆</span></div></div>
+        <div class="slot"><div class="time">09:00</div><div>心寧美 0.5、愛可穩 2 粒</div></div>
+        <div class="slot"><div class="time">13:00</div><div>心寧美 0.5、安滿達 1、利福全半粒</div></div>
+        <div class="slot"><div class="time">17:00</div><div>心寧美 0.5、安滿達 1</div></div>
+        <div class="slot"><div class="time">21:00</div><div>心寧美 0.5、安滿達 1、利福全半粒</div></div>
+        <div class="slot"><div class="time">半夜</div><div>心寧美 0.5</div></div>
+        <div class="slot"><div class="time">貼片</div><div>不加半片；住院 8 mg 等醫師決定要不要降</div></div>
+      </div>
+
+      <h3>第二階段 · 降安滿達與愛可穩（約 2–4 週）</h3>
+      <p>安滿達先停下午 13:00 那顆（400→300），一到兩週後再停 17:00 那顆（→200）。愛可穩改早餐 1 粒（50 mg）。</p>
+      <div class="card">
+        <div class="slot"><div class="time">05:00</div><div>心寧美 0.5、<span class="dose-new">安滿達 1</span></div></div>
+        <div class="slot"><div class="time">09:00</div><div>心寧美 0.5、<span class="dose-new">愛可穩 1 粒</span></div></div>
+        <div class="slot"><div class="time">13:00</div><div>心寧美 0.5 <span class="note">（這餐安滿達拿掉）</span></div></div>
+        <div class="slot"><div class="time">17:00</div><div>心寧美 0.5、<span class="dose-new">安滿達 1（之後再拿掉）</span></div></div>
+        <div class="slot"><div class="time">21:00</div><div>心寧美 0.5、安滿達 1、利福全半粒</div></div>
+        <div class="slot"><div class="time">半夜</div><div>心寧美 0.5</div></div>
+      </div>
+      <p class="note">若這階段關機太明顯（僵、吞嚥差、發高燒），立刻停在這一階、聯絡醫師，不要繼續減。</p>
+
+      <h3>第三階段 · 貼片與安眠藥（約再 2–4 週）</h3>
+      <div class="card">
+        <ul class="pills">
+          <li>賣力膜 8 mg → 4 mg（或只留醫師認為必要的劑量）。</li>
+          <li>利福全白天停，只留睡前半粒或 1/4 粒。</li>
+          <li>安規、Lyrica、舒肌痛能停則停，減少跌倒。</li>
+          <li>心寧美六次半粒原則上仍保留。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="ask">
+      <h2>9/23 回診可帶這些</h2>
+      <div class="card">
+        <ul class="pills">
+          <li>實際體重（坐秤也可），不要再用估計。</li>
+          <li>吃飯、走路、躺床各拍 20–30 秒異動影片。</li>
+          <li>分清楚：痛是「扭的時候」還是「僵的時候」。</li>
+          <li>始立現在一天幾顆、賣力膜貼幾毫克。</li>
+          <li>有無腳腫、幻覺、網狀紅斑、尿色深、肌肉痛。</li>
+          <li>請抽肌酸酐／eGFR（安滿達靠腎排）；若肌肉很痛可加 CK。</li>
+          <li>告訴醫師：補骨水 + 脊椎手術史，怕異動再傷神經與骨頭。</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      <p>這頁是依藥袋、住院給藥單與家裡手寫時間表做的劑量盤點，供神經內科討論。不是處方，也不能取代醫師。任何增減都要醫師決定；請勿自行停藥或一次減很多。</p>
+      <p>資料日期：2026/09/12。病人姓名未放上公開頁。</p>
+    </footer>
+  </main>
+</body>
+</html>

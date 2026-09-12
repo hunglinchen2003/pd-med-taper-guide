@@ -172,8 +172,55 @@
       font-size: 0.86rem;
     }
     .note { font-size: 0.92rem; color: var(--muted); }
+    .hero-img, .wide-img {
+      width: 100%;
+      border-radius: var(--radius);
+      display: block;
+      margin: 0 0 12px;
+      background: #fff;
+    }
+    .caption {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin: -6px 0 14px;
+    }
+    .pain-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .pain-grid img {
+      width: 100%;
+      border-radius: 12px;
+      display: block;
+      margin: 0 0 8px;
+      background: #fff;
+    }
+    .drug-id {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+    .drug-id img {
+      width: 92px;
+      height: 92px;
+      object-fit: cover;
+      border-radius: 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+    .drug-id h3 { margin: 0 0 4px; }
+    .tl {
+      border-left: 3px solid #c5d9d1;
+      margin: 8px 0 12px 8px;
+      padding: 0 0 0 14px;
+    }
+    .tl p { margin: 0 0 14px; }
+    .tl b { color: var(--keep); }
     @media (min-width: 640px) {
       .stats { grid-template-columns: repeat(4, 1fr); }
+      .pain-grid { grid-template-columns: 1fr 1fr 1fr; }
     }
   </style>
 </head>
@@ -184,6 +231,8 @@
   </header>
   <nav>
     <a href="#conclusion">結論</a>
+    <a href="#history">病史</a>
+    <a href="#pills">認藥</a>
     <a href="#pain">神經痛</a>
     <a href="#side-effects">副作用</a>
     <a href="#compare">劑量對照</a>
@@ -193,6 +242,8 @@
   <main>
     <section id="conclusion">
       <h2>整合結論</h2>
+      <img class="hero-img" src="img/cartoon-too-many.png" alt="卡通：藥太多時身體一直扭，脊椎舊傷被拉扯">
+      <p class="caption">藥疊太多時，身體會一直扭。下面這節脊椎已經打過骨水泥、又有鋼釘，最怕被這樣晃。</p>
       <div class="card hot">
         <p class="kicker">一句話</p>
         <p class="lead"><b>現在不是心寧美太重，是同一時間疊了太多會放大異動的藥。</b>整天扭動，會把打過骨水泥、又開過刀的脊椎反覆拉扯。病人說的神經痛，很大一部分可能是「異動在扯舊傷」，不是再加止痛藥就能好。</p>
@@ -210,22 +261,106 @@
       </div>
     </section>
 
-    <section id="pain">
-      <h2>為什麼會神經痛</h2>
-      <p>脊椎已做過<b>補骨水</b>又<b>開刀</b>。張醫師先前就說過：藥吃這麼重一陣子，異動到後來去開脊椎。體重掉到約 42 kg 後，同樣毫克數更濃，異動更容易再傷這節脊椎。</p>
-      <div class="card hot">
-        <p class="kicker">痛 A · 異動期</p>
-        <p>藥太多時：扭、晃、坐不住。開過刀的骨頭和神經根被反覆剪切，會像電、刺、抽。這時再加肌鬆或神經痛藥，常常治標不治本。</p>
+    <section id="history">
+      <h2>之前的疾病史</h2>
+      <p>寶建醫院骨科紀錄（2026 年 5 月）。公開頁不放有姓名的 X 光原圖，用示意圖說明現在這節腰在怕什麼。</p>
+      <img class="wide-img" src="img/cartoon-spine-hardware.png" alt="示意圖：腰椎上方骨水泥、下方鋼釘，異動時會晃到內固定">
+      <p class="caption">對應 5/29 術後 X 光：上面兩節是補骨水（椎體成形），下面有螺釘與鋼棒。異動等於一直搖這組內固定。</p>
+      <div class="tl">
+        <p><b>5/20 左右</b><br>家裡已在穿腰部護帶，代表開刀前背部就已經不穩。</p>
+        <p><b>5/28 急診住院</b><br>診斷：<b>第一及第二腰椎壓迫性骨折</b>、右肩滑囊炎。骨科李炫昇醫師。</p>
+        <p><b>5/29 手術</b><br>椎體成形（補骨水）＋自費可擴張椎體系統；同時做右肩關節穿刺。同意書有註明麻醉風險（心、腦、肺栓塞、肺部感染）。</p>
+        <p><b>5/30 出院</b><br>醫囑：術後需<b>背架使用、休養三個月</b>（大約到 8 月底）。</p>
+        <p><b>8/21</b><br>大同神經內科開 28 天帕金森藥（心寧美、安滿達、愛可穩、利福全）。家裡手寫時間表還疊了始立與賣力膜。</p>
+        <p><b>8/29 再住院</b><br>寶建感染科，主訴發燒。三個月養護期剛好結束前後。住院單繼續自備帕金森藥，並加抗生素、點滴、吸入、止痛與安眠藥。</p>
+        <p><b>現在（9 月）</b><br>估計體重約 42 kg，仍喊神經痛。鋼釘與骨水泥都還在，最怕異動、跌倒再造成鄰近節骨折或內固定鬆脫。</p>
       </div>
       <div class="card warn">
-        <p class="kicker">痛 B · 關機期</p>
-        <p>藥不夠或亂停時：僵、抽筋、整條背扳住。這種痛要靠穩定的心寧美，<b>不能先砍心寧美</b>。</p>
+        <p class="kicker">跟用藥的關係</p>
+        <p>壓迫性骨折常見於高齡、瘦、跌倒或異動。張醫師說過藥太重吃一陣子才異動到開脊椎。現在若還是始立加心寧美、安滿達 400 mg、賣力膜，等於在搖一套剛打好的腰。右肩滑囊炎也會因跌倒、僵硬或異動再痛。</p>
       </div>
-      <div class="card">
-        <p class="kicker">痛 C · 脊椎結構</p>
-        <p>壓迫性骨折、骨水泥、手術後神經根，本來就會痛。這要骨科／復健一起看。但若異動沒減，結構痛很難好，也比較容易再骨折、再跌倒。</p>
+    </section>
+
+    <section id="pills">
+      <h2>認藥圖示（依藥袋外觀）</h2>
+      <p>對照藥袋上的外觀說明繪製，方便家人對藥。不是藥單原圖（原圖有姓名）。</p>
+      <div class="card keep">
+        <div class="drug-id">
+          <img src="img/pill-sinemet.png" alt="心寧美：黃色橢圓錠，刻印 650">
+          <div>
+            <h3>心寧美 Sinemet</h3>
+            <p>黃色橢圓錠，一面「650」。每次半粒、約每 4 小時一次。<b>先留這支。</b></p>
+          </div>
+        </div>
       </div>
-      <p>住院時開過 Lyrica（神經痛）、舒肌痛（肌鬆）、佑克（消炎痛）、兩種安眠藥。對 42 kg 高齡，這些會<b>更軟、更昏、更容易跌</b>，跌一次對補過骨水泥的脊椎很傷。</p>
+      <div class="card hot">
+        <div class="drug-id">
+          <img src="img/pill-stalevo.png" alt="始立瓶裝 100/25/200">
+          <div>
+            <h3>始立 Stalevo</h3>
+            <p>瓶裝 100/25/200。手寫是跟心寧美同一時間吃，等於劑量重疊。<b>建議先拿掉。</b></p>
+          </div>
+        </div>
+      </div>
+      <div class="card hot">
+        <div class="drug-id">
+          <img src="img/pill-amantadine.png" alt="安滿達：淺橘圓錠，印 WD">
+          <div>
+            <h3>安滿達 Amanda</h3>
+            <p>淺橘圓錠，印「WD」。目前一天 4 粒＝400 mg，對 42 kg 高齡過重。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card warn">
+        <div class="drug-id">
+          <img src="img/pill-equfina.png" alt="愛可穩：白圓錠，印 E 284">
+          <div>
+            <h3>愛可穩 Equfina</h3>
+            <p>白圓膜衣錠，印「E 284」。早上 2 粒＝100 mg。確認沒有吃成早晚各 2 粒。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card hot">
+        <div class="drug-id">
+          <img src="img/pill-rivotril.png" alt="利福全：橘圓錠，有刻痕">
+          <div>
+            <h3>利福全／瑞多寧</h3>
+            <p>橘色圓錠、中間有刻痕。藥袋是每次半粒；手寫若吃整粒會變成兩倍。</p>
+          </div>
+        </div>
+      </div>
+      <div class="card warn">
+        <div class="drug-id">
+          <img src="img/pill-neupro.png" alt="賣力膜：膚色方形貼片">
+          <div>
+            <h3>賣力膜 Neupro</h3>
+            <p>膚色方形貼片。住院 8 mg，家屬又加半片。先拿掉多加的那半片。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pain">
+      <h2>為什麼會神經痛</h2>
+      <p>5 月底才做完 L1、L2 補骨水與內固定，8 月底才滿三個月休養。病人說的神經痛，要先分清楚是扭、是僵，還是這節腰本身。</p>
+      <div class="pain-grid">
+        <div class="card hot">
+          <img src="img/cartoon-pain-a.png" alt="卡通：身體一直扭的異動痛">
+          <p class="kicker">痛 A · 異動期</p>
+          <p>藥太多時：扭、晃、坐不住。鋼釘和骨水泥被反覆剪切，會像電、刺、抽。再加肌鬆或神經痛藥常常治標不治本。</p>
+        </div>
+        <div class="card warn">
+          <img src="img/cartoon-pain-b.png" alt="卡通：全身僵住的關機痛">
+          <p class="kicker">痛 B · 關機期</p>
+          <p>藥不夠或亂停時：僵、抽筋、整條背扳住。這種痛要靠穩定的心寧美，<b>不能先砍心寧美</b>。</p>
+        </div>
+        <div class="card">
+          <img src="img/cartoon-pain-c.png" alt="卡通：腰椎骨水泥與神經痛">
+          <p class="kicker">痛 C · 脊椎結構</p>
+          <p>L1、L2 壓迫性骨折、骨水泥、螺釘，加上右肩滑囊炎，本來就會痛。異動沒減，鄰近節比較容易再骨折。</p>
+        </div>
+      </div>
+      <p>8 月底發燒住院時開過 Lyrica、舒肌痛、佑克、兩種安眠藥。對 42 kg 高齡會<b>更軟、更昏、更容易跌</b>，跌一次對剛打好的腰很傷。</p>
     </section>
 
     <section id="side-effects">
@@ -385,13 +520,13 @@
           <li>始立現在一天幾顆、賣力膜貼幾毫克。</li>
           <li>有無腳腫、幻覺、網狀紅斑、尿色深、肌肉痛。</li>
           <li>請抽肌酸酐／eGFR（安滿達靠腎排）；若肌肉很痛可加 CK。</li>
-          <li>告訴醫師：補骨水 + 脊椎手術史，怕異動再傷神經與骨頭。</li>
+          <li>告訴醫師：2026/5/29 寶建骨科做 L1、L2 椎體成形＋內固定，右肩滑囊炎穿刺；8 月底才滿三個月休養，怕異動再傷神經與鋼釘。</li>
         </ul>
       </div>
     </section>
 
     <footer>
-      <p>這頁是依藥袋、住院給藥單與家裡手寫時間表做的劑量盤點，供神經內科討論。不是處方，也不能取代醫師。任何增減都要醫師決定；請勿自行停藥或一次減很多。</p>
+      <p>這頁是依藥袋、住院給藥單、家裡手寫時間表與 5 月骨科手術資料做的盤點，供神經內科討論。不是處方。公開頁不放有姓名的 X 光與證件。</p>
       <p>資料日期：2026/09/12。病人姓名未放上公開頁。</p>
     </footer>
   </main>
